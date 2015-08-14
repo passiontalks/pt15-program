@@ -18,10 +18,12 @@ def urlize(title):
     return '-'.join([word for word in words if word not in prune][:5])
 
 def render_singlepage(table, filename):
-    with open('filename', 'w') as f:
+    with open(filename, 'w') as f:
         for row in table:
-            print('## <span class="talk-title">%s</span> <span class="talk-speaker">(%s)</span>' % (
-                row['Talk Title'].strip(),
+            print('# <span class="talk-title">%s</span>' % (
+                row['Talk Title'].strip()), file=f)
+            print(file=f)
+            print('## <span class="talk-speaker">%s</span>' % (
                 row['Full Name'].strip()), file=f)
             print(file=f)
             print('### <span class="talk-abstract">Abstract</span>', file=f)
