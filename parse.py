@@ -107,6 +107,16 @@ def render_pages(table, dirname):
                 row['Timeslot'].strip().replace(' ', '').lower(),
                 row['Room'].strip()), file=f)
             print(file=f)
+            download_list = []
+            if len(row['Audio']) > 0 and row['Privacy: Video'] != 'X':
+                print('<audio controls><source src="{{ site.baseurl }}%s" type="audio/mpeg"></audio>' % row['Audio'], file=f)
+                print(file=f)
+                download_list.append('<a href="{{ site.baseurl }}%s">Podcast</a>' % row['Audio'])
+            if len(row['Slides']) > 0:
+                download_list.append('<a href="{{ site.baseurl }}%s">Slides</a>' % row['Slides'])
+            if len(download_list) > 0:
+                print('Download: %s' % ', '.join(download_list), file=f)
+                print(file=f)
             print('### <span class="talk-abstract">Abstract</span>', file=f)
             print(file=f)
             print(row['Talk Abstract'], file=f)
